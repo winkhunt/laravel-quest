@@ -14,7 +14,7 @@ class Question extends Model
     }
     public function setTitleAttribute($value)
     {
-        return $attributes['title']=$value;
-        return $attributes['slug']=\str_slug($value);
+        $this->attributes['title']=$value;
+        $this->attributes['slug']=\str_slug($value);
     }
 }
