@@ -12,8 +12,9 @@
                             <a href="{{ route('questions.create') }}" class="btn btn-outline-secondary">Ask Question</a>
                         </div>
                     </div>
+                    @include('layouts._message')
                 </div>
-                @include('layouts._message')
+                
                 <div class="card-body">
                     
                     @foreach ($questions as $question)
@@ -32,9 +33,14 @@
                         
                         <div class="media-body">
                             <div class="d-flex align-items-center">
-                                <h3 class="mt-0"><a href="{{ $question->url }}">{{ str_limit($question->title,60) }}</a></h3>
+                                <h3 class="mt-0"><a href="{{ $question->url }}">{{ str_limit($question->title,55) }}</a></h3>
                                 <div class="ml-auto">
                                     <a href="{{ route('questions.edit',$question->id) }}" class="btn btn-sm btn-outline-info">Edit</a>
+                                    <form action="{{ route('questions.destroy',$question->id) }}" method="post" style="display:inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                                    </form>
                                 </div>
                             </div>
                             
