@@ -13,8 +13,9 @@
                         </div>
                     </div>
                 </div>
-
+                @include('layouts._message')
                 <div class="card-body">
+                    
                     @foreach ($questions as $question)
                     <div class="media">
                         <div class="d-flex flex-column counters">
@@ -30,7 +31,13 @@
                         </div>
                         
                         <div class="media-body">
-                            <h3 class="mt-0"><a href="{{ $question->url }}">{{ $question->title }}</a></h3>
+                            <div class="d-flex align-items-center">
+                                <h3 class="mt-0"><a href="{{ $question->url }}">{{ str_limit($question->title,60) }}</a></h3>
+                                <div class="ml-auto">
+                                    <a href="{{ route('questions.edit',$question->id) }}" class="btn btn-sm btn-outline-info">Edit</a>
+                                </div>
+                            </div>
+                            
                             <p class="lead">
                                 Asked by
                                 <a href="{{ $question->user->url }}">{{ $question->user->name }}</a>
